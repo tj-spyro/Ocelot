@@ -50,6 +50,9 @@ namespace Ocelot.Configuration.File
         /// </value>
         public long Limit { get; set; }
 
+        public bool DisableCountOnPath { get; set; }
+        public bool DisableCountOnVerb { get; set; }
+
         /// <inheritdoc/>
         public override string ToString()
         {

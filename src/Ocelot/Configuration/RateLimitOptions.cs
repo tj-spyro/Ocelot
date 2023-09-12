@@ -11,7 +11,7 @@ namespace Ocelot.Configuration
         private readonly Func<List<string>> _getClientWhitelist;
 
         public RateLimitOptions(bool enableRateLimiting, string clientIdHeader, Func<List<string>> getClientWhitelist, bool disableRateLimitHeaders,
-            string quotaExceededMessage, string rateLimitCounterPrefix, RateLimitRule rateLimitRule, int httpStatusCode)
+            string quotaExceededMessage, string rateLimitCounterPrefix, RateLimitRule rateLimitRule, int httpStatusCode, bool disableCountOnPath = false, bool disableCountOnVerb = false)
         {
             EnableRateLimiting = enableRateLimiting;
             ClientIdHeader = clientIdHeader;
@@ -21,6 +21,8 @@ namespace Ocelot.Configuration
             RateLimitCounterPrefix = rateLimitCounterPrefix;
             RateLimitRule = rateLimitRule;
             HttpStatusCode = httpStatusCode;
+            DisableCountOnPath = disableCountOnPath;
+            DisableCountOnVerb = disableCountOnVerb;
         }
 
         /// <summary>
@@ -89,5 +91,8 @@ namespace Ocelot.Configuration
         /// A boolean value for disabling X-Rate-Limit and Rety-After headers.
         /// </value>
         public bool DisableRateLimitHeaders { get; }
+
+        public bool DisableCountOnPath { get; }
+        public bool DisableCountOnVerb { get; }
     }
 }

@@ -13,6 +13,8 @@ namespace Ocelot.Configuration.Builder
         private string _rateLimitCounterPrefix;
         private RateLimitRule _rateLimitRule;
         private int _httpStatusCode;
+        private bool _disableCountOnPath;
+        private bool _disableCountOnVerb;
 
         public RateLimitOptionsBuilder WithEnableRateLimiting(bool enableRateLimiting)
         {
@@ -62,11 +64,23 @@ namespace Ocelot.Configuration.Builder
             return this;
         }
 
+        public RateLimitOptionsBuilder WithDisableCountOnPath(bool disableCountOnPath)
+        {
+            _disableCountOnPath = disableCountOnPath;
+            return this;
+        }
+
+        public RateLimitOptionsBuilder WithDisableCountOnVerb(bool disableCountOnVerb)
+        {
+            _disableCountOnVerb = disableCountOnVerb;
+            return this;
+        }
+
         public RateLimitOptions Build()
         {
             return new RateLimitOptions(_enableRateLimiting, _clientIdHeader, _getClientWhitelist,
                 _disableRateLimitHeaders, _quotaExceededMessage, _rateLimitCounterPrefix,
-                _rateLimitRule, _httpStatusCode);
+                _rateLimitRule, _httpStatusCode, _disableCountOnPath, _disableCountOnVerb);
         }
     }
 }

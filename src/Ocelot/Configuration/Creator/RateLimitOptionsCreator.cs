@@ -20,6 +20,8 @@ namespace Ocelot.Configuration.Creator
                     .WithRateLimitRule(new RateLimitRule(fileRateLimitRule.Period,
                         fileRateLimitRule.PeriodTimespan,
                         fileRateLimitRule.Limit))
+                    .WithDisableCountOnPath(fileRateLimitRule.DisableCountOnPath)
+                    .WithDisableCountOnVerb(fileRateLimitRule.DisableCountOnVerb)
                     .Build();
             }
 

@@ -101,7 +101,10 @@ namespace Ocelot.RateLimit
 
         public string ComputeCounterKey(ClientRequestIdentity requestIdentity, RateLimitOptions option)
         {
-            var key = $"{option.RateLimitCounterPrefix}_{requestIdentity.ClientId}_{option.RateLimitRule.Period}_{requestIdentity.HttpVerb}_{requestIdentity.Path}";
+            var pathCounterSegment = option.DisableCountOnPath ? string.Empty : $"_{requestIdentity.Path}";
+            var verbCounterSegment = option.DisableCountOnVerb ? string.Empty : $"_{requestIdentity.HttpVerb}";
+
+            var key = $"{option.RateLimitCounterPrefix}_{requestIdentity.ClientId}_{option.RateLimitRule.Period}{verbCounterSegment}{pathCounterSegment}";
 
             var idBytes = Encoding.UTF8.GetBytes(key);
 
